@@ -30,7 +30,7 @@ router.post('/posts', function(req, res, next){
 	});
 });
 
-router.param('post', function(req,res,next,id){
+router.param('post', function(req, res, next, id){
 	var query=Post.findById(id);
 
 	query.exec(function(err, post){
@@ -45,10 +45,19 @@ router.param('post', function(req,res,next,id){
 });
 
 router.get('/posts/:post', function(req, res){
+	console.log("inside post/:post", req.post);
 	res.json(req.post);
 });
 
-router.put('/posts/:post/votes', function(){})
+router.put('/posts/:post/vote', function(req, res, next){
+	console.log("inside :post", req.post);
+	req.post.vote(function(err, post){
+		if(err)
+			return next(err);
+
+		res.json(post);
+	});
+});
 
 /*router.get('/comments/{id}', function(req, res, next){
 	Comment.find(function(err, comments){
