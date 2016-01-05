@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h3>
+    Comment
+  </h3>
+</div>
+<div>
+  <a href="{{postslist.link}}">
+    <h4>{{postslist.title}}</h4>
+  </a>
+</div>
+
+<div ng-repeat="comment in postslist.comment | orderBy:'vote'">
+  <span class="glyphicon glyphicon-thumbs-down" ng-click="minus(comment)"></span>
+   {{comment.vote}}
+  <span class="glyphicon glyphicon-thumbs-up" ng-click="plus(comment)"></span>
+  - by {{comment.author}}
+  <span style="font-size:20px; margin-left:10px;">
+    {{comment.body}}
+  </span>
+</div>
+
+<form ng-submit="addComment()">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Name" ng-model="author"></input>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
